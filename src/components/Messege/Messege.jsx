@@ -1,6 +1,4 @@
-  
-
- import React from "react";
+import React from "react";
 import { Send, Plus } from "lucide-react";
 
 const messages = [
@@ -19,19 +17,35 @@ const messages = [
 ];
 
 const contacts = [
-  { name: "Elmer Laverty", time: "12m", tags: ["Question", "Help wanted"], img: 1 },
-  { name: "Florencio Dorrance", time: "24h", tags: ["Some content"], img: 2, active: true },
+  {
+    name: "Elmer Laverty",
+    time: "12m",
+    tags: ["Question", "Help wanted"],
+    img: 1,
+  },
+  {
+    name: "Florencio Dorrance",
+    time: "24h",
+    tags: ["Some content"],
+    img: 2,
+    active: true,
+  },
   { name: "Lavern Laboy", time: "1h", tags: ["Bug", "Hacktoberfest"], img: 3 },
-  { name: "Titus Kitamura", time: "5h", tags: ["Question", "Some content"], img: 4 },
+  {
+    name: "Titus Kitamura",
+    time: "5h",
+    tags: ["Question", "Some content"],
+    img: 4,
+  },
   { name: "Geoffrey Mott", time: "2d", tags: ["Request"], img: 5 },
   { name: "Alfonzo Schuessler", time: "1m", tags: ["Follow up"], img: 6 },
 ];
 
 const Messege = () => {
   return (
-    <div className="flex flex-col md:flex-row h-[calc(100vh-100px)] gap-3 px-2 sm:px-4 mx-2 sm:mx-4 bg-gray-200 shadow rounded-3xl overflow-hidden">
+    <div className="flex flex-col md:flex-row h-[calc(100vh-100px)] gap-3 p-4 sm:px-4  bg-gray-200 shadow rounded-3xl overflow-hidden md:min-w-[900px]">
       {/* Left: Contacts Section */}
-      <div className=" md:w-[320px] md:min-w-[280px] p-4 mt-4 mb-4 flex bg-white rounded-3xl flex-col max-h-[calc(100vh-120px)] overflow-hidden">
+      <div className="w-full md:w-[400px] md:flex-none p-4   bg-white rounded-3xl flex flex-col max-h-[calc(100vh-120px)] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Messages</h2>
@@ -44,7 +58,7 @@ const Messege = () => {
         <input
           type="text"
           placeholder="Search messages"
-          className="px-4 py-2 border rounded-full text-sm"
+          className="px-4 py-2 border rounded-full text-sm border-gray-200"
         />
 
         {/* Contact List */}
@@ -123,9 +137,9 @@ const Messege = () => {
       </div>
 
       {/* Right: Chat Section */}
-      <div className="w-full md:flex-1 flex mt-0 md:mt-4 mb-4 rounded-3xl bg-white flex-col max-h-[calc(100vh-120px)] overflow-hidden">
+      <div className="flex-1 flex   rounded-3xl bg-white flex-col max-h-[calc(100vh-120px)] overflow-hidden">
         {/* Chat Header */}
-        <div className="flex items-center gap-3 px-6 py-4 border-b">
+        <div className="flex items-center gap-3 px-6 py-4 border-b border-gray-200">
           <img
             src="https://i.pravatar.cc/150?img=2"
             className="w-10 h-10 rounded-full"
@@ -138,25 +152,25 @@ const Messege = () => {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 p-4 sm:p-6 space-y-4 overflow-y-auto bg-white">
+        <div className="flex-1 px-4 sm:px-6 py-4 overflow-y-auto bg-white">
           {messages.map((msg, index) => (
             <div
               key={index}
-              className={`flex items-end gap-2 ${
+              className={`flex items-center gap-1 mb-1 ${
                 msg.fromMe ? "justify-end" : "justify-start"
               }`}
             >
               {!msg.fromMe && (
                 <img
                   src="https://i.pravatar.cc/150?img=2"
-                  className="w-8 h-8 rounded-full"
+                  className="w-6 h-6 rounded-full"
                   alt=""
                 />
               )}
 
               {/* Message Bubble */}
               <div
-                className={`text-sm px-4 py-2 rounded-xl max-w-xs sm:max-w-sm ${
+                className={`text-sm px-3 py-1.5 rounded-xl ${
                   msg.fromMe
                     ? "bg-blue-500 text-white rounded-br-none"
                     : "bg-gray-100 text-black rounded-bl-none"
@@ -168,7 +182,7 @@ const Messege = () => {
               {msg.fromMe && (
                 <img
                   src="https://i.pravatar.cc/150?img=2"
-                  className="w-8 h-8 rounded-full"
+                  className="w-6 h-6 rounded-full"
                   alt=""
                 />
               )}
@@ -177,7 +191,7 @@ const Messege = () => {
         </div>
 
         {/* Input Box */}
-        <div className="p-4 border-t">
+        <div className="p-4 border-t border-gray-200">
           <div className="flex bg-gray-100 rounded-full px-4 py-2">
             <input
               type="text"
@@ -189,10 +203,10 @@ const Messege = () => {
             </button>
           </div>
         </div>
+        
       </div>
     </div>
   );
 };
 
 export default Messege;
-

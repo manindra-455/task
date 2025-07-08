@@ -17,7 +17,7 @@ const menuItems = [
   { label: "Dashboard", icon: LayoutDashboard, to: "/" },
   { label: "Projects", icon: FolderKanban, to: "/projects" },
   { label: "Calendar", icon: Calendar, to: "/calendar" },
-  { label: "Chat", icon: MessageSquare, to: "/Messege" },
+  { label: "Chat", icon: MessageSquare, to: "/chat" },
   { label: "Team", icon: Users, to: "/team" },
 ];
 

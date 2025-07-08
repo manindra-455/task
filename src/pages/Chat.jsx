@@ -1,10 +1,13 @@
  import React from 'react'
+import Messege from '../components/Messege/Messege.jsx'
+ 
+ 
  
  
  const Chat = () => {
    return (
      <div>
-        <h1>jnknij</h1>
+          <Messege />
      </div>
    )
  }
