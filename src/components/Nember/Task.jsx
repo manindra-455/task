@@ -82,38 +82,39 @@ const Task = () => {
         </thead>
         <tbody>
           {tasks.map((task, index) => (
-            <tr key={index} className="  bg-white text-sm gap-8">
-              <td className="px-6 py-4 whitespace-nowrap text-gray-800">
+            <tr key={index} className=" bg-white text-md  ">
+              <td className="px-6 py-7 whitespace-nowrap text-gray-800  ">
                 {task.description}
               </td>
-              <td className="px-6 py-4 flex items-center gap-2">
+              <td className="px-6 py-7 flex items-center gap-2">
                 <img
                   src={`https://i.pravatar.cc/150?img=${task.avatar}`}
-                  className="w-7 h-7 rounded-full"
+                  className="w-9 h-9 rounded-full"
                   alt={task.assignedTo}
                 />
                 <span>{task.assignedTo}</span>
               </td>
-              <td className="px-6 py-4 text-gray-600">{task.startDate}</td>
-              <td className="px-6 py-4 text-gray-600">{task.dueDate}</td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-7 text-gray-600">{task.startDate}</td>
+              <td className="px-6 py-7 text-gray-600">{task.dueDate}</td>
+              <td className="px-6 py-7">
                 <span
-                  className={`text-xs font-medium px-2 py-1 rounded-full ${statusColor[task.status]}`}
+                  className={`text-xs font-medium px-2 border py-1 rounded-full ${statusColor[task.status]}`}
                 >
                   {task.status}
                 </span>
               </td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-7">
                 <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50">
                   Updates
                 </button>
               </td>
-              <td className="px-6 py-4">
+              <td className="px-6 py-7">
                 <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50">
                   Submit
                 </button>
               </td>
             </tr>
+
           ))}
         </tbody>
       </table>
