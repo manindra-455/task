@@ -8,7 +8,7 @@ const ProjectPage = () => {
   const [activeTab, setActiveTab] = useState("task"); // or 'member'
 
   return (
-    <div className="p-6 space-y-6 bg-gray-100">
+    <div className="p-6   space-y-6   bg-gray-100  w-full ">
       {/* Top Header Section */}
       <div className="flex justify-between items-start bg-white p-4 rounded-xl  ">
         <div>
@@ -30,7 +30,7 @@ const ProjectPage = () => {
       </div>
 
       {/* Tabs */}
-      <div className="flex space-x-6  border-gray-200 ">
+      <div className="flex space-x-6  border-gray-100  ">
         <button
           onClick={() => setActiveTab("task")}
           className={`py-2 font-medium ${
@@ -50,7 +50,7 @@ const ProjectPage = () => {
       </div>
 
       {/* Conditional Rendering */}
-      <div>
+      <div className="bg-gray-100   "  >
         {activeTab === "task" ? <Task /> : <Nember />}
       </div>
     </div>
@@ -58,3 +58,5 @@ const ProjectPage = () => {
 };
 
 export default ProjectPage;
+
+ 
