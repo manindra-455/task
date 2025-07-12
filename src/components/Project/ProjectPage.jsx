@@ -1,56 +1,68 @@
-import React, { useState } from "react";
- 
+ import React, { useState } from "react";
 import Nember from "../Nember/Nember";
 import Task from "../Nember/task";
- 
 
 const ProjectPage = () => {
-  const [activeTab, setActiveTab] = useState("task"); // or 'member'
+  const [activeTab, setActiveTab] = useState("task");
 
   return (
-    <div className="p-6   space-y-6   bg-gray-100  w-full ">
-      {/* Top Header Section */}
-      <div className="flex justify-between items-start bg-white p-4 rounded-xl  ">
+    <div className="w-full min-h-screen overflow-x-hidden bg-gray-100 px-4 sm:px-6 md:px-10 py-6 space-y-6">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between gap-6 md:items-center bg-white p-6 rounded-xl shadow-sm">
+        {/* Left: Title + Avatars */}
         <div>
-          <h2 className="text-xl font-bold">An AI Based SaaS to Review Resume</h2>
-          <div className="flex mt-2">
-            {/* Avatars */}
-            <img src="https://i.pravatar.cc/150?img=1" className="w-8 h-8 rounded-full -ml-2 border-2 border-white" />
-            <img src="https://i.pravatar.cc/150?img=2" className="w-8 h-8 rounded-full -ml-2 border-2 border-white" />
-            <img src="https://i.pravatar.cc/150?img=3" className="w-8 h-8 rounded-full -ml-2 border-2 border-white" />
-            <span className="ml-2 text-sm text-gray-500">+3</span>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
+            An AI Based SaaS to Review Resume
+          </h2>
+          <div className="flex mt-3 items-center">
+            {[1, 2, 3].map((id, index) => (
+              <img
+                key={id}
+                src={`https://i.pravatar.cc/150?img=${id}`}
+                className={`w-8 h-8 rounded-full border-2 border-white ${
+                  index !== 0 ? "-ml-2" : ""
+                }`}
+                alt={`Avatar ${id}`}
+              />
+            ))}
+            <span className="ml-3 text-sm text-gray-500">+3</span>
           </div>
         </div>
 
-        <div className="text-right">
+        {/* Right: Project Info */}
+        <div className="text-left md:text-right">
           <h3 className="text-gray-500 font-semibold">Project XYZ</h3>
-          <p className="text-sm text-gray-400">Start Date: DD/MM/YYYY</p>
-          <p className="text-sm text-gray-400">Due Date: DD/MM/YYYY</p>
+          <p className="text-sm text-gray-400">Start Date: 12/07/2025</p>
+          <p className="text-sm text-gray-400">Due Date: 31/08/2025</p>
         </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex space-x-6  border-gray-100  ">
+      <div className="flex flex-wrap items-center gap-6 border-b border-gray-200 px-1 md:px-4">
         <button
           onClick={() => setActiveTab("task")}
-          className={`py-2 font-medium ${
-            activeTab === "task" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"
+          className={`py-2 font-medium transition-all duration-200 ${
+            activeTab === "task"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500 hover:text-blue-500"
           }`}
         >
           Tasks
         </button>
         <button
           onClick={() => setActiveTab("member")}
-          className={`py-2 font-medium ${
-            activeTab === "member" ? "border-b-2 border-blue-500 text-blue-600" : "text-gray-500"
+          className={`py-2 font-medium transition-all duration-200 ${
+            activeTab === "member"
+              ? "border-b-2 border-blue-500 text-blue-600"
+              : "text-gray-500 hover:text-blue-500"
           }`}
         >
           Members
         </button>
       </div>
 
-      {/* Conditional Rendering */}
-      <div className="bg-gray-100   "  >
+      {/* Tab Content */}
+      <div className="w-full">
         {activeTab === "task" ? <Task /> : <Nember />}
       </div>
     </div>
@@ -58,5 +70,3 @@ const ProjectPage = () => {
 };
 
 export default ProjectPage;
-
- 

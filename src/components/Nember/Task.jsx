@@ -60,122 +60,77 @@ const tasks = [
 ];
 
 const statusColor = {
-  "Completed": "text-green-600 bg-green-100",
+  Completed: "text-green-600 bg-green-100",
   "In Progress": "text-yellow-600 bg-yellow-100",
-  "Pending": "text-red-600 bg-red-100",
+  Pending: "text-red-600 bg-red-100",
 };
 
 const Task = () => {
   return (
-    // <div className=" p-6  rounded-4xl  overflow-x-auto ">
-
-    //   <table className=" min-w-[900px]   w-full table-auto border-separate border-spacing-y-2 bg-gray-100      ">
-    //     <thead className="bg-white">
-    //       <tr className="text-left text-sm font-semibold bg-white  text-gray-600">
-    //         <th className="px-6 py-5">Description</th>
-    //         <th className="px-6 py-5">Assigned to</th>
-    //         <th className="px-6 py-5">Start Date</th>
-    //         <th className="px-6 py-5">Due Date</th>
-    //         <th className="px-6 py-5">Status</th>
-    //         <th className="px-6 py-5">Updates</th>
-    //         <th className="px-6 py-5">Submit</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>
-    //       {tasks.map((task, index) => (
-    //         <tr key={index} className=" bg-white text-md  ">
-    //           <td className="px-6 py-7 whitespace-nowrap text-gray-800  ">
-    //             {task.description}
-    //           </td>
-    //           <td className="px-6 py-7 flex items-center whitespace-nowrap gap-2">
-    //             <img
-    //               src={`https://i.pravatar.cc/150?img=${task.avatar}`}
-    //               className="w-9 h-9 rounded-full"
-    //               alt={task.assignedTo}
-    //             />
-    //             <span>{task.assignedTo}</span>
-    //           </td>
-    //           <td className="px-6 py-7 text-gray-600 whitespace-nowrap">{task.startDate}</td>
-    //           <td className="px-6 py-7 text-gray-600 whitespace-nowrap">{task.dueDate}</td>
-    //           <td className="px-6 py-7 whitespace-nowrap">
-    //             <span
-    //               className={`text-xs font-medium px-2 border py-1 rounded-full ${statusColor[task.status]}`}
-    //             >
-    //               {task.status}
-    //             </span>
-    //           </td>
-    //           <td className="px-6 py-7 whitespace-nowrap">
-    //             <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50">
-    //               Updates
-    //             </button>
-    //           </td>
-    //           <td className="px-6 py-7 whitespace-nowrap">
-    //             <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50">
-    //               Submit
-    //             </button>
-    //           </td>
-    //         </tr>
-
-    //       ))}
-    //     </tbody>
-    //   </table>
-
-    // </div>
-     <div className="w-full overflow-x-auto p-4">
-      <table className="min-w-[900px] table-auto border-separate border-spacing-y-2 bg-gray-100 w-full">
-        <thead className="bg-white">
-          <tr className="text-left text-sm font-semibold text-gray-600">
-            <th className="px-6 py-5">Description</th>
-            <th className="px-6 py-5">Assigned to</th>
-            <th className="px-6 py-5">Start Date</th>
-            <th className="px-6 py-5">Due Date</th>
-            <th className="px-6 py-5">Status</th>
-            <th className="px-6 py-5">Updates</th>
-            <th className="px-6 py-5">Submit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map((task, index) => (
-            <tr key={index} className="bg-white text-md">
-              <td className="px-6 py-7 whitespace-nowrap text-gray-800">
-                {task.description}
-              </td>
-              <td className="px-6 py-7 whitespace-nowrap">
-                <div className="flex items-center gap-2">
-                  <img
-                    src={`https://i.pravatar.cc/150?img=${task.avatar}`}
-                    className="w-9 h-9 rounded-full"
-                    alt={task.assignedTo}
-                  />
-                  <span>{task.assignedTo}</span>
-                </div>
-              </td>
-              <td className="px-6 py-7 text-gray-600 whitespace-nowrap">{task.startDate}</td>
-              <td className="px-6 py-7 text-gray-600 whitespace-nowrap">{task.dueDate}</td>
-              <td className="px-6 py-7 whitespace-nowrap">
-                <span className={`text-xs font-medium px-2 border py-1 rounded-full ${statusColor[task.status]}`}>
-                  {task.status}
-                </span>
-              </td>
-              <td className="px-6 py-7 whitespace-nowrap">
-                <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50">
-                  Updates
-                </button>
-              </td>
-              <td className="px-6 py-7 whitespace-nowrap">
-                <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50">
-                  Submit
-                </button>
-              </td>
+    <div className="w-full p-3 sm:p-4 lg:p-6">
+      {/* Horizontal scroll container */}
+      <div className="overflow-x-auto w-full">
+        <table className="w-full table-auto border-separate border-spacing-y-3 min-w-[900px]">
+          <thead>
+            <tr className="text-left text-sm font-semibold text-gray-600 bg-white">
+              <th className="px-4 lg:px-6 py-4 rounded-l-lg">Description</th>
+              <th className="px-4 lg:px-6 py-4">Assigned to</th>
+              <th className="px-4 lg:px-6 py-4">Start Date</th>
+              <th className="px-4 lg:px-6 py-4">Due Date</th>
+              <th className="px-4 lg:px-6 py-4">Status</th>
+              <th className="px-4 lg:px-6 py-4">Updates</th>
+              <th className="px-4 lg:px-6 py-4 rounded-r-lg">Submit</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tasks.map((task, index) => (
+              <tr
+                key={index}
+                className="bg-white text-sm text-gray-800 rounded-lg shadow-sm"
+              >
+                <td className="px-4 lg:px-6 py-5 rounded-l-lg whitespace-nowrap">
+                  {task.description}
+                </td>
+                <td className="px-4 lg:px-6 py-5 whitespace-nowrap">
+                  <div className="flex items-center gap-2">
+                    <img
+                      src={`https://i.pravatar.cc/150?img=${task.avatar}`}
+                      alt={task.assignedTo}
+                      className="w-8 h-8 lg:w-9 lg:h-9 rounded-full flex-shrink-0"
+                    />
+                    <span>{task.assignedTo}</span>
+                  </div>
+                </td>
+                <td className="px-4 lg:px-6 py-5 text-gray-600 whitespace-nowrap">
+                  {task.startDate}
+                </td>
+                <td className="px-4 lg:px-6 py-5 text-gray-600 whitespace-nowrap">
+                  {task.dueDate}
+                </td>
+                <td className="px-4 lg:px-6 py-5 whitespace-nowrap">
+                  <span
+                    className={`text-xs font-medium px-2 py-1 border rounded-full ${statusColor[task.status]}`}
+                  >
+                    {task.status}
+                  </span>
+                </td>
+                <td className="px-4 lg:px-6 py-5 whitespace-nowrap">
+                  <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50 transition-all">
+                    Updates
+                  </button>
+                </td>
+                <td className="px-4 lg:px-6 py-5 rounded-r-lg whitespace-nowrap">
+                  <button className="text-sm text-blue-500 border border-blue-500 px-3 py-1 rounded-full hover:bg-blue-50 transition-all">
+                    Submit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
 export default Task;
-
-
-  
