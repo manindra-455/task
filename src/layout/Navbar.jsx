@@ -15,6 +15,8 @@ const Navbar = () => {
         />
       </div>
 
+     
+
       {/* Right: Bell + Avatar */}
       <div className="flex items-center gap-6">
         <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
