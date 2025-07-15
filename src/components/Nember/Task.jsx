@@ -67,7 +67,7 @@ const statusColor = {
 
 const Task = () => {
   return (
-    <div className="w-full p-3 sm:p-4 lg:p-6">
+    <div className="w-full p-3 sm:p-4 lg:py-6">
       {/* Horizontal scroll container */}
       <div className="overflow-x-auto w-full">
         <table className="w-full table-auto border-separate border-spacing-y-3 min-w-[900px]">

@@ -6,9 +6,9 @@ const ProjectPage = () => {
   const [activeTab, setActiveTab] = useState("task");
 
   return (
-    <div className="w-full min-h-screen overflow-x-hidden bg-gray-100 px-4 sm:px-6 md:px-10 py-6 space-y-6">
+    <div className="w-full min-h-screen overflow-x-hidden bg-gray-100 px-4 sm:px-2   py-6 space-y-6">
       {/* Header */}
-      <div className="flex flex-col md:flex-row justify-between gap-6 md:items-center bg-white p-6 rounded-xl shadow-sm">
+      <div className="flex flex-col md:flex-row justify-between gap-6 md:items-center bg-gray-100 p-6 rounded-xl ">
         {/* Left: Title + Avatars */}
         <div>
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800">
