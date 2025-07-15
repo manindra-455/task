@@ -9,7 +9,7 @@ import ProtectedRoute from "./router/ProtectedRoute";
 import MobileBlockPage from "./utility/MobileBlockPage";
 import Login from "./pages/Login";
 import ProjectPage from "./components/Project/ProjectPage";
- 
+import Plan from "./pages/Plan";
 
 function App() {
   return (
@@ -30,9 +30,7 @@ function App() {
         <Route path="calendar" element={<Calendar />} />
         <Route path="chat" element={<Chat />} />
         <Route path="team" element={<Team />} />
-         
-
-          
+        <Route path="plan" element={<Plan />} />
       </Route>
     </Routes>
   );
