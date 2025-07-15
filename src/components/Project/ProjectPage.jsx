@@ -31,7 +31,7 @@ const ProjectPage = () => {
 
         {/* Right: Project Info */}
         <div className="text-left md:text-right">
-          <h3 className="text-gray-500 font-semibold">Project XYZ</h3>
+          <h3 className="text-black font-semibold">Project XYZ</h3>
           <p className="text-sm text-gray-400">Start Date: 12/07/2025</p>
           <p className="text-sm text-gray-400">Due Date: 31/08/2025</p>
         </div>
