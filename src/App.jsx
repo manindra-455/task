@@ -8,6 +8,7 @@ import Team from "./pages/Team";
 import ProtectedRoute from "./router/ProtectedRoute";
 import MobileBlockPage from "./utility/MobileBlockPage";
 import Login from "./pages/Login";
+import ContactPage from "./pages/ContactPage";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="calendar" element={<Calendar />} />
         <Route path="chat" element={<Chat />} />
         <Route path="team" element={<Team />} />
+        <Route path="contact" element={<ContactPage/>} />
       </Route>
     </Routes>
   );
