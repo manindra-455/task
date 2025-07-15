@@ -24,7 +24,7 @@ const menuItems = [
 const generalItems = [
   { label: "Settings", icon: Settings, to: "/settings" },
   { label: "Help", icon: HelpCircle, to: "/help" },
-  { label: "Logout", icon: LogOut, to: "/logout" },
+  
 ];
 
 const Sidebar = () => {
@@ -38,7 +38,7 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`h-screen bg-[#f4f4f4] py-2 px-3 flex flex-col gap-8 transition-all duration-300 ease-in-out rounded-2xl ${collapsed ? "w-20" : "w-64"
+      className={`relative h-screen bg-[#f4f4f4] py-2 px-3 flex flex-col gap-8 transition-all duration-300 ease-in-out rounded-2xl ${collapsed ? "w-20" : "w-64"
         }`}
     >
       {/* Left: Logo */}
@@ -122,6 +122,32 @@ const Sidebar = () => {
             </button>
           ))}
         </nav>
+      </div>
+      {/* Bottom Buttons */}
+      <div className="absolute bottom-6 left-0 w-full flex flex-col items-center space-y-3 px-4">
+        {/* Upgrade Button */}
+        <button
+          onClick={() => handleNavigation('/Plan')}
+          className={`transition flex items-center justify-center font-semibold shadow-md
+            ${collapsed
+              ? 'w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-red-500 text-white text-xl p-0'
+              : 'w-full py-2 rounded-full text-white bg-gradient-to-r from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600'}
+          `}
+        >
+          {collapsed ? <span>⚡</span> : <>Upgrade <span className="ml-1">⚡</span></>}
+        </button>
+        {/* Logout Button */}
+        <button
+          onClick={() => handleNavigation('/logout')}
+          className={`transition flex items-center justify-center font-semibold
+            ${collapsed
+              ? 'w-12 h-12 rounded-full border-2 border-blue-400 text-blue-500 p-0'
+              : 'w-full py-2 rounded-full border-2 border-blue-400 text-blue-500 gap-2 hover:bg-blue-50'}
+          `}
+        >
+          <LogOut className="h-5 w-5" />
+          {!collapsed && 'Logout'}
+        </button>
       </div>
     </aside>
   );
