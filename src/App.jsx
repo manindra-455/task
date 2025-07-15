@@ -8,6 +8,7 @@ import Team from "./pages/Team";
 import ProtectedRoute from "./router/ProtectedRoute";
 import MobileBlockPage from "./utility/MobileBlockPage";
 import Login from "./pages/Login";
+import ProjectPage from "./components/Project/ProjectPage";
 import Plan from "./pages/Plan";
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
       >
         <Route index element={<Dashboard />} />
         <Route path="projects" element={<Projects />} />
+        <Route path="projects/view" element={<ProjectPage />} />
         <Route path="calendar" element={<Calendar />} />
         <Route path="chat" element={<Chat />} />
         <Route path="team" element={<Team />} />
