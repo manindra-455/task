@@ -1,22 +1,23 @@
+ 
+
+
 import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebaar';
 import Navbar from './Navbar';
 
 const RootLayout = () => {
     return (
-        <>
-            <div className='p-2 '>
-                <div className="flex h-screen w-full min-w-0 gap-2">
-                    <Sidebar />
-                    <div className="w-full flex flex-col">
-                        <Navbar />
-                        <main className="flex-1 overflow-y-auto min-w-0 p-4 hideScrollBar">
-                            <Outlet />
-                        </main>
-                    </div>
+        <div className='w-full max-w-full overflow-hidden'>
+            <div className="flex h-screen min-h-0 w-full gap-2 ">
+                <Sidebar />
+                <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
+                    <Navbar />
+                    <main className="flex-1 overflow-y-auto p-2 sm:p-4 hideScrollBar">
+                        <Outlet />
+                    </main>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
