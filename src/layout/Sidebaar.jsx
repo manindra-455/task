@@ -128,7 +128,7 @@ const Sidebar = () => {
         {/* Upgrade Button */}
         <button
           onClick={() => handleNavigation('/Plan')}
-          className={`transition flex items-center justify-center font-semibold shadow-md
+          className={`transition flex items-center justify-center font-semibold shadow-md cursor-pointer
             ${collapsed
               ? 'w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-red-500 text-white text-xl p-0'
               : 'w-full py-2 rounded-full text-white bg-gradient-to-r from-orange-400 to-red-500 hover:from-orange-500 hover:to-red-600'}
@@ -139,7 +139,7 @@ const Sidebar = () => {
         {/* Logout Button */}
         <button
           onClick={() => handleNavigation('/logout')}
-          className={`transition flex items-center justify-center font-semibold
+          className={`transition flex items-center justify-center font-semibold cursor-pointer
             ${collapsed
               ? 'w-12 h-12 rounded-full border-2 border-blue-400 text-blue-500 p-0'
               : 'w-full py-2 rounded-full border-2 border-blue-400 text-blue-500 gap-2 hover:bg-blue-50'}

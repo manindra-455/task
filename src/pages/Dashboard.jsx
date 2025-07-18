@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { TrendingUp, Video, Pause, Square, Search, Plus, MonitorX } from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from "recharts"
 
@@ -8,6 +8,9 @@ const Dashboard = () => {
   const [windowWidth, setWindowWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 1280)
   const [isAdminPanelOpen, setIsAdminPanelOpen] = useState(false);
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(true); // or false, as needed
+  const [showAppsPopup, setShowAppsPopup] = useState(false);
+  const appsBtnRef = useRef(null);
+  const popupRef = useRef(null);
 
 
   useEffect(() => {
@@ -20,6 +23,27 @@ const Dashboard = () => {
     window.addEventListener("resize", handleResize)
     return () => window.removeEventListener("resize", handleResize)
   }, [])
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target) &&
+        appsBtnRef.current &&
+        !appsBtnRef.current.contains(event.target)
+      ) {
+        setShowAppsPopup(false);
+      }
+    }
+    if (showAppsPopup) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showAppsPopup]);
 
   // Chart data
   const barData = [
@@ -55,11 +79,11 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 p-8 font-sans transparent-scrollbar">
+    <div className="min-h-screen bg-slate-50 p-8 font-sans transparent-scrollbar" style={{ fontFamily: 'Roboto, sans-serif' }}>
       {/* Header */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 md:gap-0">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900 mb-1">Dashboard</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-1" style={{ fontFamily: 'Inter, sans-serif' }}>Dashboard</h1>
           <p className="text-sm text-gray-600">Plan, prioritize, and accomplish your tasks with ease</p>
         </div>
         <div className="flex flex-col md:flex-row items-end md:items-center gap-2 md:gap-4">
@@ -82,6 +106,40 @@ const Dashboard = () => {
             </button>
           )}
         </div>
+
+         {/* App Quick Access Row */}
+        {isUserPanelOpen && (
+  <div className="flex justify-center gap-4 my-6 relative">
+    {/* Popup for app buttons */}
+    {showAppsPopup && (
+      <div ref={popupRef} className="absolute right-16 top-1/2 -translate-y-1/2 flex gap-4 bg-white shadow-lg rounded-full px-4 py-2 z-50">
+         <button key="notion" className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-200 hover:scale-110">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" alt="Notion" className="w-8 h-8" />
+         </button>
+         <button key="figma" className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-200 hover:scale-110">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" className="w-8 h-8" />
+         </button>
+         <button key="chrome" className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-200 hover:scale-110">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/Google_Chrome_icon_%282011%29.png" alt="Chrome" className="w-8 h-8" />
+         </button>
+         <button key="github" className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-200 hover:scale-110">
+           <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" className="w-8 h-8" />
+         </button>
+         <button key="vscode" className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center cursor-pointer hover:ring-2 hover:ring-blue-200 hover:scale-110">
+           <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Visual_Studio_Code_1.35_icon.svg" alt="VSCode" className="w-8 h-8" />
+         </button>
+        </div>
+      )}
+    {/* Apps Button */}
+    <button
+      ref={appsBtnRef}
+      className="w-8 h-8 rounded-full bg-white shadow flex items-center justify-center cursor-pointer transition-transform duration-150 hover:ring-2 hover:ring-blue-200 hover:scale-110 z-60"
+      onClick={() => setShowAppsPopup((prev) => !prev)}
+    >
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png" alt="Plus" className="w-8 h-8" />
+    </button>
+  </div>
+)}
       </div>
 
       {/* Stats Cards */}
@@ -89,7 +147,7 @@ const Dashboard = () => {
         {/* Total Projects - Blue gradient */}
         <div className="rounded-3xl p-6 relative bg-gradient-to-br from-blue-400 to-blue-700 text-white shadow-md">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-semibold text-sm text-white">Total Projects</h3>
+            <h3 className="font-semibold text-sm text-white" style={{ fontFamily: 'Inter, sans-serif' }}>Total Projects</h3>
             <div className="w-8 h-8 rounded-full flex items-center justify-center border border-white/30 bg-white/10">
               <TrendingUp className="w-4 h-4" />
             </div>
@@ -101,7 +159,7 @@ const Dashboard = () => {
         {/* Ended Projects */}
         <div className="rounded-3xl p-6 relative bg-white border border-gray-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-semibold text-sm text-gray-800">Ended Projects</h3>
+            <h3 className="font-semibold text-sm text-gray-800" style={{ fontFamily: 'Inter, sans-serif' }}>Ended Projects</h3>
             <div className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-gray-50">
               <TrendingUp className="w-4 h-4 text-gray-600" />
             </div>
@@ -113,7 +171,7 @@ const Dashboard = () => {
         {/* Running Projects */}
         <div className="rounded-3xl p-6 relative bg-white border border-gray-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-semibold text-sm text-gray-800">Running Projects</h3>
+            <h3 className="font-semibold text-sm text-gray-800" style={{ fontFamily: 'Inter, sans-serif' }}>Running Projects</h3>
             <div className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-gray-50">
               <TrendingUp className="w-4 h-4 text-gray-600" />
             </div>
@@ -125,7 +183,7 @@ const Dashboard = () => {
         {/* Pending Projects */}
         <div className="rounded-3xl p-6 relative bg-white border border-gray-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
-            <h3 className="font-semibold text-sm text-gray-800">Pending Projects</h3>
+            <h3 className="font-semibold text-sm text-gray-800" style={{ fontFamily: 'Inter, sans-serif' }}>Pending Projects</h3>
             <div className="w-8 h-8 rounded-full flex items-center justify-center border border-gray-200 bg-gray-50">
               <TrendingUp className="w-4 h-4 text-gray-600" />
             </div>
@@ -135,285 +193,209 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Main Content Grid - 3 Columns */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* Left Column */}
-        <div className="flex flex-col gap-6">
-          {/* Project Analytics */}
-          <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-md">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Project Analytics</h3>
-            <div className="h-48">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={barData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                  <XAxis dataKey="name" axisLine={false} tickLine={false} tick={{ fill: "#718096", fontSize: 14 }} />
-                  <YAxis hide />
-                  <Bar dataKey="value" fill="#3182ce" radius={[6, 6, 0, 0]} maxBarSize={40} />
-                </BarChart>
+      {/* Main Content Grid - Custom Layout */}
+      <div className="flex flex-wrap gap-6 mt-6">
+        {/* Project Analytics */}
+        <div className="min-w-[580px] max-w-[650px] w-full flex-1 bg-white p-6 border border-gray-200 shadow-md flex flex-col justify-between" style={{ height: '216px', borderRadius: '30px', opacity: 1 }}>
+          <h3 className="text-xl font-semibold text-gray-900 mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>Project Analytics</h3>
+          <div className="flex-1 flex items-end justify-between w-full h-full">
+            {/* Bar Chart */}
+            {[25, 65, 40, 55, 30, 45, 80].map((v, i) => (
+              <div key={i} className="flex flex-col items-center justify-end h-full">
+                <div className="w-8 rounded-t-lg" style={{width: `${50}px` , height: `${v * 1.5}px`, background: 'linear-gradient(180deg, #4FC3F7 0%, #1976D2 100%)' }}></div>
+                <span className="text-xs text-gray-500 mt-2">{['S','M','T','W','T','F','S'][i]}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Reminders */}
+        <div className="min-w-[250px] max-w-[310px] w-full flex-1 bg-white p-6 border border-gray-200 shadow-md flex flex-col justify-between" style={{ height: '217px', borderRadius: '30px', opacity: 1 }}>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2" style={{ fontFamily: 'Inter, sans-serif' }}>Reminders</h3>
+          <div>
+            <div className="text-blue-600 font-semibold cursor-pointer mb-1">Meeting with Abc Company</div>
+            <div className="text-gray-500 text-sm mb-4">Time: 02:00 pm - 04:00 pm</div>
+            <button className="bg-blue-600 text-white px-5 py-2 rounded-xl flex items-center gap-2 font-medium border-none cursor-pointer text-sm transition-colors duration-200 hover:bg-blue-800 w-full justify-center">
+              <Video size={16} /> Start Meeting
+            </button>
+          </div>
+        </div>
+        {/* Time Tracker */}
+        <div className="min-w-[250px] max-w-[310px] w-full flex-1 p-6 shadow-md flex flex-col items-center justify-center" style={{ height: '217px', borderRadius: '30px', opacity: 1, borderWidth: '1px', borderStyle: 'solid', borderColor: '#e5e7eb', background: 'linear-gradient(135deg, #1976D2 0%, #4FC3F7 100%)' }}>
+          <h3 className="text-lg font-semibold text-white mb-4 self-start" style={{ fontFamily: 'Inter, sans-serif' }}>Time Tracker</h3>
+          <div className="text-4xl font-bold mb-6 tracking-wider font-mono text-white">01:23:42</div>
+          {/* Removed Pause and Stop buttons */}
+        </div>
+        {/* Projects */}
+        <div className="min-w-[250px] max-w-[350px] w-full flex-1 bg-white p-6 border border-gray-200 shadow-md flex flex-col" style={{ height: '355px', borderRadius: '30px', opacity: 1 }}>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>Projects</h3>
+            {isAdminPanelOpen && (
+              <button className="border border-blue-500 text-blue-500 px-3 py-1 rounded-full text-xs font-medium hover:bg-blue-50">+ New</button>
+            )}
+          </div>
+          <div className="flex-1 overflow-y-auto custom-scrollbar">
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-red-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900" style={{ fontFamily: 'Roboto, sans-serif' }}>Develop API Endpoints</div>
+                  <div className="text-xs text-gray-500" style={{ fontFamily: 'Roboto, sans-serif' }}>Due date: July 30, 2025</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-purple-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900">Onboarding Flow</div>
+                  <div className="text-xs text-gray-500">Due date: Sep 30, 2025</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-blue-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900">Build Dashboard</div>
+                  <div className="text-xs text-gray-500">Due date: Aug 30, 2025</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-red-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900">Optimize Page Load</div>
+                  <div className="text-xs text-gray-500">Due date: Dec 30, 2025</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-blue-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900">Build iOS App</div>
+                  <div className="text-xs text-gray-500">Due date: Jan 30, 2025</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-blue-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900">Build iOS App</div>
+                  <div className="text-xs text-gray-500">Due date: Jan 30, 2025</div>
+                </div>
+                
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="w-4 h-4 rounded bg-blue-400 inline-block"></span>
+                <div>
+                  <div className="font-semibold text-sm text-gray-900">Build iOS App</div>
+                  <div className="text-xs text-gray-500">Due date: Jan 30, 2025</div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* Project Progress */}
+        <div className="min-w-[250px] max-w-[310px] w-full flex-1 bg-white p-6 border border-gray-200 shadow-md flex flex-col items-center justify-center" style={{ height: '352px', borderRadius: '30px', opacity: 1 }}>
+          <h3 className="text-lg font-semibold text-gray-900 mb-6 self-start" style={{ fontFamily: 'Inter, sans-serif' }}>Project Progress</h3>
+          <div className="flex flex-col items-center justify-center flex-1 w-full">
+            <div className="relative w-72 h-52 flex items-center justify-center" >
+              <ResponsiveContainer width="100%" height={180}>
+                <PieChart style={{ marginTop: '-15%' }}>
+                  <Pie
+                    data={pieData}
+                    cx="50%"
+                    cy="100%"
+                    startAngle={180}
+                    endAngle={0}
+                    innerRadius={70}
+                    outerRadius={110}
+                    dataKey="value"
+                    paddingAngle={2}
+                  >
+                    <Cell fill="#3182ce" />
+                    <Cell fill="#4FC3F7" />
+                    <Cell fill="#cbd5e0" />
+                  </Pie>
+                </PieChart>
               </ResponsiveContainer>
+              <div className="absolute left-1/2 top-[72%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center w-full">
+                <div className="text-4xl font-extrabold text-gray-900 leading-none">41%</div>
+                <div className="text-xl text-blue-500 font-semibold mt-1">Project Ended</div>
+              </div>
             </div>
-          </div>
-
-          {/* Team Collaboration */}
-          <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-md">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 m-0">Team Collaboration</h3>
-              {isAdminPanelOpen &&(
-              <button className="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded-full text-xs font-medium cursor-pointer flex items-center gap-1 transition-all duration-200 hover:bg-blue-600 hover:text-white">
-                <Plus size={14} />
-                Add Member
-              </button>)}
-            </div>
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Thor Odinson"
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Thor Odinson</h4>
-                    <p className="text-xs text-gray-600 m-0">
-                      Working on <span className="text-gray-900 font-medium">GitHub Repository</span>
-                    </p>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-200 text-green-800">
-                  Completed
-                </span>
+            <div className="flex justify-center gap-4 mt-4">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-blue-500"></div>
+                <span className="text-xs text-gray-600">Completed</span>
               </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Loki Sharma"
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Loki Sharma</h4>
-                    <p className="text-xs text-gray-600 m-0">
-                      Working on <span className="text-gray-900 font-medium">Time Software</span>
-                    </p>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-200 text-green-800">
-                  Completed
-                </span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-blue-400"></div>
+                <span className="text-xs text-gray-600">In Progress</span>
               </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Tony Stark"
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Tony Stark</h4>
-                    <p className="text-xs text-gray-600 m-0">
-                      Working on <span className="text-gray-900 font-medium">Responsive Layout for Homepage</span>
-                    </p>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-200 text-orange-800">
-                  Ongoing
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Happy Verma"
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Happy Verma</h4>
-                    <p className="text-xs text-gray-600 m-0">
-                      Working on <span className="text-gray-900 font-medium">Management Tools</span>
-                    </p>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-orange-200 text-orange-800">
-                  Ongoing
-                </span>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="/placeholder.svg?height=40&width=40"
-                    alt="Steve Rogers"
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                  />
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Steve Rogers</h4>
-                    <p className="text-xs text-gray-600 m-0">
-                      Working on <span className="text-gray-900 font-medium">User Authentication System</span>
-                    </p>
-                  </div>
-                </div>
-                <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-200 text-red-800">Pending</span>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 rounded-full bg-gray-300"></div>
+                <span className="text-xs text-gray-600">Pending</span>
               </div>
             </div>
           </div>
         </div>
-
-        {/* Middle Column */}
-        <div className="flex flex-col gap-6">
-          {/* Reminders */}
-          <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-md">
-            <h3 className="text-lg font-semibold text-gray-900 mb-6">Reminders</h3>
-            <div className="text-left">
-              <h4 className="text-lg font-semibold text-blue-600 mb-2">Meeting with Abc Company</h4>
-              <p className="text-sm text-gray-600 mb-6">Time: 02:00 pm - 04:00 pm</p>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-xl flex items-center gap-2 font-medium border-none cursor-pointer text-sm transition-colors duration-200 hover:bg-blue-800">
-                <Video size={16} />
-                Start Meeting
-              </button>
-            </div>
+        {/* Team Collaboration */}
+        <div className="min-w-[580px] max-w-[650px] w-full flex-1 bg-white p-6 border border-gray-200 shadow-md flex flex-col" style={{ height: '355px', borderRadius: '30px', opacity: 1 }}>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-gray-900" style={{ fontFamily: 'Inter, sans-serif' }}>Team Collaboration</h3>
+            {isAdminPanelOpen && (
+              <button className="border border-blue-500 text-blue-500 px-3 py-1 rounded-full text-xs font-medium hover:bg-blue-50">+ Add Member</button>
+            )}
           </div>
-
-          {/* Project Progress + Time Tracker for mobile */}
-          <div className="flex flex-col gap-6 md:gap-0">
-            <div>
-              {/* Project Progress */}
-              <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-md">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">Project Progress</h3>
-                <div className="flex justify-center mb-6">
-                  <div className="relative w-48 h-48">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <PieChart>
-                        <Pie
-                          data={pieData}
-                          cx="50%"
-                          cy="50%"
-                          innerRadius={60}
-                          outerRadius={90}
-                          paddingAngle={2}
-                          dataKey="value"
-                        >
-                          <Cell fill="#3182ce" />
-                          <Cell fill="#63b3ed" />
-                          <Cell fill="#cbd5e0" />
-                        </Pie>
-                      </PieChart>
-                    </ResponsiveContainer>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center">
-                        <div className="text-4xl font-bold text-gray-900 leading-none">41%</div>
-                        <div className="text-sm text-blue-600 font-medium mt-1">Project Ended</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex justify-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-blue-600"></div>
-                    <span className="text-xs text-gray-600">Completed</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-blue-400"></div>
-                    <span className="text-xs text-gray-600">In Progress</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-gray-300"></div>
-                    <span className="text-xs text-gray-600">Pending</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="block lg:hidden mt-6">
-              {/* Time Tracker (mobile/tablet only) */}
-              <div className="bg-gradient-to-br from-blue-700 to-blue-900 rounded-3xl p-6 text-white text-center shadow-md">
-                <h3 className="text-lg font-semibold mb-8 text-left">Time Tracker</h3>
-                <div className="text-4xl font-bold mb-8 tracking-wider font-mono">01:23:42</div>
-                <div className="flex justify-center gap-4">
-                  <button className="w-12 h-12 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-200 bg-white/20 text-white hover:bg-white/30">
-                    <Pause className="w-5 h-5" />
-                  </button>
-                  <button className="w-12 h-12 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-200 bg-red-600 text-white hover:bg-red-700">
-                    <Square className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Column */}
-        <div className="flex flex-col gap-6">
-          {/* Projects */}
-          <div className="bg-white rounded-3xl p-6 border border-gray-200 shadow-md">
-            <div className="flex justify-between items-center mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 m-0">Projects</h3>
-              {isAdminPanelOpen &&(
-              <button className="px-4 py-2 bg-white text-blue-600 border border-blue-600 rounded-full text-xs font-medium cursor-pointer flex items-center gap-1 transition-all duration-200 hover:bg-blue-600 hover:text-white">
-                <Plus size={14} />
-                New
-              </button> )}
-            </div>
+          <div className="flex-1 overflow-y-auto custom-scrollbar">
             <div className="flex flex-col gap-4">
-              {/* Develop API Endpoints */}
+              {/* Member 1 */}
               <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-md flex-shrink-0 bg-red-400"></div>
-                <div>
-                  <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Develop API Endpoints</h4>
-                  <p className="text-xs text-gray-600 m-0">Due date: July 30, 2025</p>
+                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Thor Odinson" className="w-10 h-10 rounded-full object-cover" />
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-gray-900">Thor Odinson</div>
+                  <div className="text-xs text-gray-500">Working on <span className="font-medium text-gray-900">GitHub Repository</span></div>
                 </div>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Completed</span>
               </div>
-
-              {/* Onboarding Flow */}
+              {/* Member 2 */}
               <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-md flex-shrink-0 bg-purple-400"></div>
-                <div>
-                  <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Onboarding Flow</h4>
-                  <p className="text-xs text-gray-600 m-0">Due date: Sep 30, 2025</p>
+                <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Loki Sharma" className="w-10 h-10 rounded-full object-cover" />
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-gray-900">Loki Sharma</div>
+                  <div className="text-xs text-gray-500">Working on <span className="font-medium text-gray-900">Time Software</span></div>
                 </div>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">Completed</span>
               </div>
-
-              {/* Build Dashboard */}
+              {/* Member 3 */}
               <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-md flex-shrink-0 bg-blue-400"></div>
-                <div>
-                  <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Build Dashboard</h4>
-                  <p className="text-xs text-gray-600 m-0">Due date: Aug 30, 2025</p>
+                <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Tony Stark" className="w-10 h-10 rounded-full object-cover" />
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-gray-900">Tony Stark</div>
+                  <div className="text-xs text-gray-500">Working on <span className="font-medium text-gray-900">Responsive Layout for Homepage</span></div>
                 </div>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Ongoing</span>
               </div>
-
-              {/* Optimize Page Load */}
+              {/* Member 4 */}
               <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-md flex-shrink-0 bg-red-400"></div>
-                <div>
-                  <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Optimize Page Load</h4>
-                  <p className="text-xs text-gray-600 m-0">Due date: Dec 30, 2025</p>
+                <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Happy Verma" className="w-10 h-10 rounded-full object-cover" />
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-gray-900">Happy Verma</div>
+                  <div className="text-xs text-gray-500">Working on <span className="font-medium text-gray-900">Management Tools</span></div>
                 </div>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Ongoing</span>
               </div>
-
-              {/* Build iOS App */}
+              {/* Member 5 */}
               <div className="flex items-center gap-3">
-                <div className="w-6 h-6 rounded-md flex-shrink-0 bg-blue-400"></div>
-                <div>
-                  <h4 className="font-semibold text-sm text-gray-900 m-0 mb-1">Build iOS App</h4>
-                  <p className="text-xs text-gray-600 m-0">Due date: Jan 30, 2025</p>
+                <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="Steve Rogers" className="w-10 h-10 rounded-full object-cover" />
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-gray-900">Steve Rogers</div>
+                  <div className="text-xs text-gray-500">Working on <span className="font-medium text-gray-900">User Authentication System</span></div>
                 </div>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">Pending</span>
               </div>
-            </div>
-          </div>
-
-          <div className="hidden lg:block">
-            {/* Time Tracker (desktop only) */}
-            <div className="bg-gradient-to-br from-blue-700 to-blue-900 rounded-3xl p-6 text-white text-center shadow-md">
-              <h3 className="text-lg font-semibold mb-8 text-left">Time Tracker</h3>
-              <div className="text-4xl font-bold mb-8 tracking-wider font-mono">01:23:42</div>
-              <div className="flex justify-center gap-4">
-                <button className="w-12 h-12 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-200 bg-white/20 text-white hover:bg-white/30">
-                  <Pause className="w-5 h-5" />
-                </button>
-                <button className="w-12 h-12 rounded-full border-none cursor-pointer flex items-center justify-center transition-all duration-200 bg-red-600 text-white hover:bg-red-700">
-                  <Square className="w-5 h-5" />
-                </button>
+              <div className="flex items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Tony Stark" className="w-10 h-10 rounded-full object-cover" />
+                <div className="flex-1">
+                  <div className="font-semibold text-sm text-gray-900">Tony Stark</div>
+                  <div className="text-xs text-gray-500">Working on <span className="font-medium text-gray-900">Responsive Layout for Homepage</span></div>
+                </div>
+                <span className="px-3 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">Ongoing</span>
               </div>
             </div>
           </div>

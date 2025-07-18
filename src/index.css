@@ -52,3 +52,45 @@
 .hideScrollBar::-webkit-scrollbar {
   display: none;
 }
+
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.translucent-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.3) rgba(0,0,0,0);
+}
+.translucent-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+.translucent-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.3); /* slate-600, 30% opacity */
+  border-radius: 6px;
+}
+.translucent-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 116, 139, 0.5);
+}
+
+/* Custom translucent scrollbar for dashboard cards */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.2);
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.custom-scrollbar:hover::-webkit-scrollbar-thumb {
+  background: rgba(100, 116, 139, 0.4);
+}
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(100, 116, 139, 0.2) transparent;
+}
