@@ -12,7 +12,11 @@ const RootLayout = () => {
                 <Sidebar />
                 <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
                     <Navbar />
+<<<<<<< HEAD
                     <main className="flex-1 overflow-y-auto py-2 sm:py-4 hideScrollBar ">
+=======
+                    <main className="flex-1 overflow-y-auto py-2 sm:py-4 hideScrollBar">
+>>>>>>> 24f4459 (fixing padding in task less padding kari ha)
                         <Outlet />
                     </main>
                 </div>
