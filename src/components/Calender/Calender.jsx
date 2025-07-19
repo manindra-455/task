@@ -1,10 +1,14 @@
-// import React, { useRef, useState } from 'react';
+// import React, { useRef, useState , useEffect } from 'react';
 // import FullCalendar from '@fullcalendar/react';
 // import dayGridPlugin from '@fullcalendar/daygrid';
 // import interactionPlugin from '@fullcalendar/interaction';
 
-// const Calender = () => {
+
+// const Calender = ({isSidebarOpen}) => {
+
 //   const calendarRef = useRef();
+
+
 //   const [events, setEvents] = useState([
 //     { id: '1', title: 'Team Meeting', date: '2025-07-18' },
 //     { id: '2', title: 'Project Deadline', date: '2025-07-20' },
@@ -49,6 +53,16 @@
 //     setNewEventTitle('');
 //   };
 
+
+//    useEffect(() => {
+//     if (calendarRef.current) {
+//       const calendarApi = calendarRef.current.getApi();
+//       calendarApi.updateSize();
+//     }
+//   }, [isSidebarOpen]);
+
+
+
 //   const renderEventContent = (eventInfo) => {
 //     return (
 //       <>
@@ -59,9 +73,11 @@
 //     );
 //   };
 
+
+
 //   return (
-//     <div className="p-4 bg-gray-600 rounded-2xl min-w-0 overflow-x-auto">
-//       <div className="bg-white rounded-2xl p-4 border relative  ">
+//     <div className="p-4 bg-gray-600 rounded-2xl w-full max-w-full">
+//       <div className="bg-white rounded-2xl p-4 border  relative     ">
 //         <FullCalendar
 //           ref={calendarRef}
 //           plugins={[dayGridPlugin, interactionPlugin]}
@@ -72,6 +88,7 @@
 //           eventContent={renderEventContent}
 //           events={events}
 //            windowResize={true} 
+//            className='max-w-4xl'
 //         />
 
 //         {/* MODAL */}
@@ -124,6 +141,9 @@ const Calender = () => {
     { id: '2', title: 'Project Deadline', date: '2025-07-20' },
     { id: '3', title: 'Hackathon', date: '2025-07-25' }
   ]);
+
+  console.log("events 😍😍😍" , events);
+  
 
   // For Modal
   const [showModal, setShowModal] = useState(false);
@@ -279,7 +299,7 @@ const Calender = () => {
 
           {/* MODAL */}
           {showModal && (
-            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="fixed inset-0 bg-[#0303034f] flex items-center justify-center z-50">
               <div className="bg-white rounded-xl shadow-lg p-6 w-80">
                 <h2 className="text-lg font-bold mb-4">Add Event</h2>
                 <p className="text-sm text-gray-600 mb-2">Date: {newEventDate}</p>
@@ -314,3 +334,36 @@ const Calender = () => {
 };
 
 export default Calender;
+
+
+//   import React, { useRef, useEffect } from "react";
+// import FullCalendar from "@fullcalendar/react";
+// import dayGridPlugin from "@fullcalendar/daygrid";
+// import interactionPlugin from "@fullcalendar/interaction";
+
+// const Calendar = ({ sidebarOpen }) => {
+//   const calendarRef = useRef();
+
+//   useEffect(() => {
+//     const calendarApi = calendarRef.current?.getApi();
+//     if (calendarApi) {
+//       setTimeout(() => {
+//         calendarApi.updateSize();
+//       }, 300); // let sidebar animation complete
+//     }
+//   }, [sidebarOpen]);
+
+//   return (
+//     <div className="w-full h-[100vh] bg-black">
+//       <FullCalendar
+//         ref={calendarRef}
+//         plugins={[dayGridPlugin, interactionPlugin]}
+//         initialView="dayGridMonth"
+//         height="auto"
+//         expandRows={true}
+//       />
+//     </div>
+//   );
+// };
+
+// export default Calendar;
