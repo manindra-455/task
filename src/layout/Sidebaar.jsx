@@ -128,3 +128,42 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+
+// import React from 'react'
+// import { useNavigate } from 'react-router-dom'
+
+// const Sidebaar = () => {
+
+//   const navigate = useNavigate()
+
+//   const handlenaigation = (path) => {
+
+//   }
+
+
+//   return (
+     
+//       <aside className='bg-gray-100 p-6 h-screen w-64' >
+
+//         <h1 className='text-3xl text-bold ' >sidebarr</h1>
+
+//          <nav className='flex flex-col gap-4 ' >
+
+//           <button className=' text-left text-3xl text-bold' onClick={() => handlenaigation("/")} >dashbord</button>
+
+//           <button className='text-left text-3xl text-bold' onClick={() => handlenaigation("/project")} >setting</button>
+
+//           <button className='text-left text-3xl text-bold' onClick={() => handlenaigation("/project")} >ckljdoie</button>
+
+//           <button className='text-left text-3xl text-bold ' onClick={() => handlenaigation("/project")} >kcwk</button>
+
+//          </nav>
+
+//       </aside>
+     
+//   )
+// }
+
+// export default Sidebaar
