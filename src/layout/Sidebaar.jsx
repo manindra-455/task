@@ -131,35 +131,85 @@ export default Sidebar;
 
 
 
-// import React from 'react'
+// import React, { useState } from 'react'
 // import { useNavigate } from 'react-router-dom'
+// import {
+//   LayoutDashboard,
+//   FolderKanban,
+//   Calendar,
+//   ChevronLeft,
+//   ChevronRight
+// } from "lucide-react"; // 👈 importing only needed icons
+
 
 // const Sidebaar = () => {
 
 //   const navigate = useNavigate()
 
 //   const handlenaigation = (path) => {
-
+//     navigate(path)
 //   }
+
+//   const [collapsed , setCollapsed] = useState(false)
+
+//   const menuitems = [
+//     {label : "Dashboard" , path:'/' , icon : LayoutDashboard},
+//     { label: "Projects", path: "/projects", icon: FolderKanban },
+//     { label: "Calendar", path: "/calendar", icon: Calendar },
+//   ]
 
 
 //   return (
      
-//       <aside className='bg-gray-100 p-6 h-screen w-64' >
+//       <aside className={`bg-gray-100 p-6 h-screen w-20 ${collapsed ? "w-20" : "w-64"}`} >
 
-//         <h1 className='text-3xl text-bold ' >sidebarr</h1>
+         
+
+//         <div className="flex items-center justify-between">
+
+//           <h2>
+//             {collapsed ? "tf" : "taskfleet"}
+//           </h2>
+
+//           <button
+//           onClick={() => setCollapsed(!collapsed)}
+//           >
+//             {collapsed ? (
+//               <ChevronRight className='w-5 h-5' />
+//             ) : (
+//               <ChevronLeft className='w-5 h-5'/>
+//             )}
+//           </button>
+
+
+//         </div>
+
+
 
 //          <nav className='flex flex-col gap-4 ' >
 
-//           <button className=' text-left text-3xl text-bold' onClick={() => handlenaigation("/")} >dashbord</button>
-
-//           <button className='text-left text-3xl text-bold' onClick={() => handlenaigation("/project")} >setting</button>
-
-//           <button className='text-left text-3xl text-bold' onClick={() => handlenaigation("/project")} >ckljdoie</button>
-
-//           <button className='text-left text-3xl text-bold ' onClick={() => handlenaigation("/project")} >kcwk</button>
+//         {menuitems.map(({label , path , icon: Icon}) => (
+//           <button
+//           key={path}
+//           onClick={() => handlenaigation(path)}
+//            className={`flex items-center gap-4 rounded-2xl  text-left mt-7 ${
+//             location.pathname === path} ? " bg-blue-100 text-blue-500" 
+//             : 
+//             " hover:bg-gray-400 text-gray-600 "
+//              `}
+//           >
+//             <Icon className='w-5 h-5' / > 
+//               <span 
+//               className={`   ${collapsed ? "opacity-0 w-0 overflow-hidden " : "opacity-100 w-auto"}`}
+//               >
+//                 {label}
+//               </span>
+//           </button>
+//         ))}
 
 //          </nav>
+
+
 
 //       </aside>
      
