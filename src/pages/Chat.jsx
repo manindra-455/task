@@ -1,5 +1,16 @@
-const Chat = () => {
-  return <h1 className="">Chat Page</h1>;
-};
-
-export default Chat;
+ import React from 'react'
+import Messege from '../components/Messege/Messege.jsx'
+ 
+ 
+ 
+ 
+ const Chat = () => {
+   return (
+     <div>
+          <Messege />
+     </div>
+   )
+ }
+ 
+ export default Chat
+ 
