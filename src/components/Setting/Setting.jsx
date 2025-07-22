@@ -1,6 +1,8 @@
  import React, { useState } from 'react'
-import ProfileSetting from '../ProfileSetting/ProfileSetting'
+ 
 import { User, CreditCard, Puzzle, ShieldCheck, Trash2 } from "lucide-react";
+import ProfileSetting from './ProfileSetting';
+import Delete from './Delete';
 
 const Setting = () => {
   const [activetab, setactivetab] = useState("profile");
@@ -41,6 +43,7 @@ const Setting = () => {
 
       <main className='flex-1 p-6 bg-gray-100 min-h-[calc(100vh-80px)]'>
         {activetab === "profile" && <ProfileSetting />}
+        {activetab === "delete" && <Delete />}
       </main>
     </div>
   );
