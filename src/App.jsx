@@ -13,6 +13,9 @@ import ContactPage from "./pages/ContactPage";
 
 import ProjectPage from "./components/Project/ProjectPage";
 import Plan from "./pages/Plan";
+import AssignTask from "./pages/AssignTask";
+import CreateProject from "./pages/CreateProject";
+
 
 function App() {
   return (
@@ -37,6 +40,8 @@ function App() {
         <Route path="contact" element={<ContactPage />} />
 
         <Route path="plan" element={<Plan />} />
+        <Route path="Assign" element={<AssignTask/>} />
+        <Route path="Create" element={<CreateProject/>} />
       </Route>
     </Routes>
   );
