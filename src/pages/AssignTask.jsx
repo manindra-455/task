@@ -12,14 +12,28 @@ const employees = [
 ];
 
 const AssignTask = () => {
+  const [taskName, setTaskName] = useState('');
+  const [description, setDescription] = useState('');
   const [selectedEmployee, setSelectedEmployee] = useState(employees[0].name);
   const [showEmployeeList, setShowEmployeeList] = useState(false);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Task Assigned: ${taskName}\nDescription: ${description}\nEmployee: ${selectedEmployee}`);
+    setTaskName("");
+    setDescription("");
+  };
+
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Assign New Task</h1>
-      {/* Move form box outside and stretch it */}
-      <div className="flex flex-col md:flex-row gap-8 bg-white shadow rounded-xl p-6 w-full">
+    <div className="h-auto p-4">
+      <div className="w-full">
+        <h1 className="text-3xl font-normal mb-6">Assign New Task</h1>
+        
+        {/* New div outside form container */}
+        <div className="bg-gray-100 p-4 rounded-3xl mb-6 border border-gray-200 h-auto w-full">
+          
+          {/* Form container with both form fields and employee selection */}
+          <form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-8 bg-white shadow rounded-xl p-6 w-full border border-gray-200 mt-4">
         {/* Form Fields */}
         <div className="flex-1 min-w-[350px]">
           <label className="block text-gray-700 font-medium mb-2" htmlFor="taskName">
@@ -30,6 +44,9 @@ const AssignTask = () => {
             type="text"
             placeholder="Enter Task Name"
             className="w-full h-[56px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={taskName}
+            onChange={(e) => setTaskName(e.target.value)}
+            required
           />
           <label className="block text-gray-700 font-medium mb-2 mt-6" htmlFor="description">
             Description
@@ -38,6 +55,8 @@ const AssignTask = () => {
             <textarea
               id="description"
               className="w-full h-[204px] px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 resize-none pr-10"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <label className="block text-gray-700 font-medium mb-2 mt-6">Select Duration</label>
@@ -116,8 +135,11 @@ const AssignTask = () => {
             )}
           </div>
         </div>
+        </form>
+        </div>
+        </div>
       </div>
-    </div>
+
   );
 };
 
