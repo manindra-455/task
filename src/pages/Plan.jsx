@@ -176,5 +176,4 @@ export default function Plan() {
     </div>
   )
 }
-
-// export default Plan ;
+export default Plan ;
