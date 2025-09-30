@@ -1,6 +1,6 @@
  import React, { useState } from "react";
 import Nember from "../Nember/Nember";
-import Task from "../Nember/task";
+import Task from "../Nember/Task";
 
 const ProjectPage = () => {
   const [activeTab, setActiveTab] = useState("task");

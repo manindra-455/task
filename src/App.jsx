@@ -8,10 +8,14 @@ import Team from "./pages/Team";
 import ProtectedRoute from "./router/ProtectedRoute";
 import MobileBlockPage from "./utility/MobileBlockPage";
 import Login from "./pages/Login";
+
+import ContactPage from "./pages/ContactPage";
+
 import ProjectPage from "./components/Project/ProjectPage";
  
 import Setting from "./pages/Settings";
  
+import Plan from "./pages/Plan";
 
 function App() {
   return (
@@ -34,11 +38,14 @@ function App() {
         <Route path="team" element={<Team />} />
 
 
+
         {/* setting routes */}
         <Route path="settings" element={<Setting />} />
 
-        
-          
+       
+        <Route path="contact" element={<ContactPage />} />
+
+        <Route path="plan" element={<Plan />} />
       </Route>
     </Routes>
   );
