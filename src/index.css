@@ -52,6 +52,7 @@
 .hideScrollBar::-webkit-scrollbar {
   display: none;
 }
+
 .hide-scrollbar {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none;  /* IE and Edge */
@@ -93,3 +94,4 @@
   scrollbar-width: thin;
   scrollbar-color: rgba(100, 116, 139, 0.2) transparent;
 }
+

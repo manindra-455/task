@@ -12,6 +12,9 @@ import Login from "./pages/Login";
 import ContactPage from "./pages/ContactPage";
 
 import ProjectPage from "./components/Project/ProjectPage";
+ 
+import Setting from "./pages/Settings";
+ 
 import Plan from "./pages/Plan";
 
 function App() {
@@ -34,6 +37,12 @@ function App() {
         <Route path="chat" element={<Chat />} />
         <Route path="team" element={<Team />} />
 
+
+
+        {/* setting routes */}
+        <Route path="settings" element={<Setting />} />
+
+       
         <Route path="contact" element={<ContactPage />} />
 
         <Route path="plan" element={<Plan />} />
@@ -43,3 +52,34 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
