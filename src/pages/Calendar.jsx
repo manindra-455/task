@@ -3,7 +3,7 @@
 
 
 import React from 'react'
-import Calender from '../components/calender/calender.jsx'
+import Calender from '../components/calender/Calender.jsx'
 
 const Calendar = () => {
   return (
