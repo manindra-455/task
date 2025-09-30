@@ -5,7 +5,7 @@ import ProjectPage from '../components/Project/ProjectPage'
  const Team = () => {
    return (
      <div>
-       {/* <ProjectPage /> */}
+        <ProjectPage /> 
      </div>
    )
  }
